@@ -25,7 +25,7 @@ public interface BaseTestConfig extends Config {
     @Key("browserSize")
     String getBrowserSize();
 
-    @Key("remoteUrl")
+    @Key("remote")
     String getRemoteURL();
 }
 
