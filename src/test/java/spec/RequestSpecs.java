@@ -2,13 +2,17 @@ package spec;
 
 import io.restassured.specification.RequestSpecification;
 
+import static helpers.CustomApiListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
-import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.ContentType.*;
 
 public class RequestSpecs {
 
-    public static RequestSpecification requestSpec = with()
-            .log().all()
-            .contentType(JSON)
-            .queryParam("projectId", "1771");
- }
+    public static RequestSpecification loginRequestSpec = with()
+            .filter(withCustomTemplates())
+            .basePath("/auth/login")
+            .log().body()
+            .log().uri()
+            .contentType(JSON);
+
+}
