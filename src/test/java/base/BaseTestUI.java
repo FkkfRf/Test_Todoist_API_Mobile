@@ -14,7 +14,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static helpers.CustomApiListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 
-public class BaseTest {
+public class BaseTestUI {
     @BeforeAll
     static void setUp() {
         step("Устанавливаем базовый URI для REST API, URL для UI", () -> {

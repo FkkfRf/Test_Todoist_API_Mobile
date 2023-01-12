@@ -5,7 +5,7 @@ import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 
 public class ProjectProvider {
-    static BaseTestConfig configBase = ConfigFactory.create(BaseTestConfig.class, System.getProperties());
+    static ProjectConfig configBase = ConfigFactory.create(ProjectConfig.class, System.getProperties());
 
     public static void configBase() {
         RestAssured.baseURI = ProjectProvider.configBase.getBaseUri();

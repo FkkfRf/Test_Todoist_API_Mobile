@@ -1,30 +1,23 @@
 package tests;
 
-import base.BaseTest;
+import base.BaseTestAPI;
 import models.lombok.LoginBody;
-import models.lombok.LoginSuccessResponse;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-
 import static spec.RequestSpecs.loginRequestSpec;
 import static spec.ResponseSpecs.loginSuccessResponseSpec;
 import static spec.ResponseSpecs.loginUnSuccessResponseSpec;
 
-public class TodoistTests extends BaseTest {
-    private static Integer SUCCESS_STATUS_CODE = 200;
-    private static Integer UNSUCCESS_STATUS_CODE = 401;
+public class TodoistTests extends BaseTestAPI {
+
     @Test
     void loginSuccessTest() {
 
         LoginBody loginBody = new LoginBody();
-        loginBody.setEmail("vil_la@bk.ru");
-        loginBody.setPassword("Vfcmrf23");
+        loginBody.setEmail(loginEmail);
+        loginBody.setPassword(loginPassword);
 
-       // LoginSuccessResponse response =
         given()
                 .spec(loginRequestSpec)
                 .body(loginBody)
@@ -32,13 +25,12 @@ public class TodoistTests extends BaseTest {
                 .post()
                 .then()
                 .spec(loginSuccessResponseSpec);
-        //open("/favicon.ico");
     }
 
     @Test
     void loginUnSuccessTest() {
         LoginBody loginBody = new LoginBody();
-        loginBody.setEmail("vil_la@bk.ru");
+        loginBody.setEmail("111111@11.ru");
         loginBody.setPassword("11111111");
 
         given()
@@ -48,8 +40,6 @@ public class TodoistTests extends BaseTest {
                 .post()
                 .then()
                 .spec(loginUnSuccessResponseSpec);
-        //open("/favicon.ico");
-        //sleep(30000);
 
     }
 
