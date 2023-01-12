@@ -10,7 +10,7 @@ public class RequestSpecs {
 
     public static RequestSpecification loginRequestSpec = with()
             .filter(withCustomTemplates())
-            .basePath("/auth/login")
+            .basePath("/API/v9.0/user/login")
             .log().body()
             .log().uri()
             .contentType(JSON);

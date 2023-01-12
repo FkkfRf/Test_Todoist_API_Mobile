@@ -33,14 +33,14 @@ public class BaseTest {
 
     @AfterEach
     void addAttachments() {
-        step("прикрепляем логи и отчеты выполнения", () -> {
+        /*step("прикрепляем логи и отчеты выполнения", () -> {
             Attach.screenshotAs("Last screenshot");
             Attach.pageSource();
             Attach.browserConsoleLogs();
             Attach.addVideo();
-        });
+        });*/
         step("закрываем вебдрайвер", () -> {
-            Selenide.closeWebDriver();
+            //Selenide.closeWebDriver();
         });
     }
 

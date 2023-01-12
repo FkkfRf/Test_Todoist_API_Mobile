@@ -3,21 +3,20 @@ package spec;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
 
-import static io.restassured.filter.log.LogDetail.BODY;
-import static io.restassured.filter.log.LogDetail.STATUS;
+import static io.restassured.filter.log.LogDetail.*;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ResponseSpecs {
+    private static Integer SUCCESS_STATUS_CODE = 200;
+    private static Integer UNSUCCESS_STATUS_CODE = 401;
     public static ResponseSpecification loginSuccessResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(405)
+            .expectStatusCode(200)
             .build();
 
     public static ResponseSpecification loginUnSuccessResponseSpec = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(200)
+            .log(ALL)
+            .expectStatusCode(401)
             .build();
 
     public static ResponseSpecification createSuccessResponseSpec = new ResponseSpecBuilder()
@@ -41,6 +40,4 @@ public class ResponseSpecs {
             .log(BODY)
             .expectStatusCode(204)
             .build();
-
-
 }
