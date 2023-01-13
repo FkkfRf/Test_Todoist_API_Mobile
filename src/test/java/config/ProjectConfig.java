@@ -10,10 +10,6 @@ public interface ProjectConfig extends Config {
     @DefaultValue("https://todoist.com")
     String getBaseUrl();
 
-    @Key("baseUri")
-    @DefaultValue("https://todoist.com")
-    String getBaseUri();
-
     @Key("browser")
     @DefaultValue("CHROME")
     String getBrowser();
@@ -27,5 +23,7 @@ public interface ProjectConfig extends Config {
 
     @Key("remote")
     String getRemoteURL();
+
+
 }
 

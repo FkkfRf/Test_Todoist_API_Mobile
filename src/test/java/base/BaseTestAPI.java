@@ -19,10 +19,6 @@ public class BaseTestAPI {
             ProjectProvider.configBase();
             RestAssured.filters(withCustomTemplates());
         });
-        step("Задаём параметры для входа", () -> {
-            loginEmail = LoginCreate.config.loginEmail();
-            loginPassword = LoginCreate.config.loginPassword();
-        });
     }
 }
 

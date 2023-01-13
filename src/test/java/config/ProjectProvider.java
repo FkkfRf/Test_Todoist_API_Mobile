@@ -1,14 +1,12 @@
 package config;
 
 import com.codeborne.selenide.Configuration;
-import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 
 public class ProjectProvider {
     static ProjectConfig configBase = ConfigFactory.create(ProjectConfig.class, System.getProperties());
 
     public static void configBase() {
-        RestAssured.baseURI = ProjectProvider.configBase.getBaseUri();
         Configuration.baseUrl = ProjectProvider.configBase.getBaseUrl();
         Configuration.browser = ProjectProvider.configBase.getBrowser();
         Configuration.browserVersion = ProjectProvider.configBase.getBrowserVersion();
