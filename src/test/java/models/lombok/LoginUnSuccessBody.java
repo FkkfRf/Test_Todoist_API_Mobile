@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LoginUnSuccessResponse {
+public class LoginUnSuccessBody {
     public List<LoginUnSuccess> data;
 
     @Data

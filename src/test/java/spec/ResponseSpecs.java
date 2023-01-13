@@ -7,8 +7,6 @@ import static io.restassured.filter.log.LogDetail.*;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ResponseSpecs {
-    private static Integer SUCCESS_STATUS_CODE = 200;
-    private static Integer UNSUCCESS_STATUS_CODE = 401;
     public static ResponseSpecification loginSuccessResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
             .expectStatusCode(200)

@@ -30,8 +30,8 @@ public class TodoistTests extends BaseTestAPI {
     @Test
     void loginUnSuccessTest() {
         LoginBody loginBody = new LoginBody();
-        loginBody.setEmail(loginEmail+" ");
-        loginBody.setPassword(loginPassword+" ");
+        loginBody.setEmail(loginEmail + " ");
+        loginBody.setPassword(loginPassword + " ");
 
         given()
                 .spec(loginRequestSpec)
@@ -43,6 +43,6 @@ public class TodoistTests extends BaseTestAPI {
 
     }
 
-}
 
+}
 
