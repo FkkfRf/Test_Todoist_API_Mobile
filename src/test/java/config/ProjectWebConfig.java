@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "classpath:config/${env}.properties"
 })
-public interface ProjectConfig extends Config {
+public interface ProjectWebConfig extends Config {
     @Key("baseUrl")
     @DefaultValue("https://todoist.com")
     String getBaseUrl();

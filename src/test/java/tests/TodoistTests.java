@@ -1,70 +1,70 @@
 package tests;
 
 import base.BaseTestAPI;
-import models.lombok.CreateProject;
-import models.lombok.LoginBody;
+import models.lombok.ProjectBody;
+import models.lombok.ProjectResponseBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.RequestSpecs.createRequestSpec;
-import static spec.RequestSpecs.loginRequestSpec;
+import static spec.RequestSpecs.getRequestSpec;
 import static spec.ResponseSpecs.*;
 
 public class TodoistTests extends BaseTestAPI {
-    @Test
-    @DisplayName("Add project")
-    void addNewProjectTest() {
-        CreateProject createProject = new CreateProject();
-        final CreateProject[] projectData = new CreateProject[1];
-        createProject.setName("Проект Э");
 
-        step("Create project", () -> {
-            projectData[0] = given()
+
+    @Test
+    @DisplayName("Добавить проект")
+    void addNewProjectTest() {
+
+        ProjectBody projectBody = new ProjectBody();
+        projectBody.setName("Проект 2");
+
+        step("Создать проект", () -> {
+            ProjectResponseBody response = given()
                     .spec(createRequestSpec)
-                    .body(createProject)
+                    .body(projectBody)
                     .when()
                     .post("/projects")
                     .then()
-                    .spec(createSuccessResponseSpec)
-                    .extract().as(CreateProject.class);
+                    .spec(successResponseSpec)
+                    .extract().as(ProjectResponseBody.class);
         });
-        //step("Check project id in response", () ->
-        //assertEquals(projectName, projectData[0].getName()));
-    }
-    @Test
-    void loginSuccessTest() {
-
-        LoginBody loginBody = new LoginBody();
-        loginBody.setEmail(loginEmail);
-        loginBody.setPassword(loginPassword);
-
-        given()
-                .spec(loginRequestSpec)
-                .body(loginBody)
-                .when()
-                .post()
-                .then()
-                .spec(loginSuccessResponseSpec);
+        step("Проверить наличие созданного проекта в response", () ->
+                assertEquals("Проект Ю", projectBody.getName()));
     }
 
     @Test
-    void loginUnSuccessTest() {
-        LoginBody loginBody = new LoginBody();
-        loginBody.setEmail(loginEmail + " ");
-        loginBody.setPassword(loginPassword + " ");
+    @DisplayName("Изменить имя последнего созданного проекта")
+    public void updateNameOfLastProjectTest() {
 
-        given()
-                .spec(loginRequestSpec)
-                .body(loginBody)
-                .when()
-                .post()
-                .then()
-                .spec(loginUnSuccessResponseSpec);
+        step("Получить имена всех проектов", () -> {
+            //ProjectResponseBody response = new ProjectResponseBody();
+            List<ProjectResponseBody> response = new ArrayList<>();
+            ProjectResponseBody responsee = given()
+                    .spec(getRequestSpec)
+                    .when()
+                    .get("/projects")
+                    .then()
+                    .spec(successResponseSpec)
+                    .extract().as(ProjectResponseBody.class);
 
+
+/* List<StepData> stepList = new ArrayList<>();
+            for (int i = 0; i < stepList.size(); i++) {
+                $$(".TreeElement__node").get(i).shouldHave(text(stepList.get(i).getName()));
+            }
+            List<String> expectedSteps = stepList.stream().map(StepData::getName).toList();
+            */
+        });
     }
-
 
 }
 

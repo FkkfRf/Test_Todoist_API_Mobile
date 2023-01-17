@@ -4,7 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
 
 public class ProjectProvider {
-    static ProjectConfig configBase = ConfigFactory.create(ProjectConfig.class, System.getProperties());
+    static ProjectWebConfig configBase = ConfigFactory.create(ProjectWebConfig.class, System.getProperties());
 
     public static void configBase() {
         Configuration.baseUrl = ProjectProvider.configBase.getBaseUrl();

@@ -7,21 +7,13 @@ import static io.restassured.filter.log.LogDetail.*;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class ResponseSpecs {
-    public static ResponseSpecification createSuccessResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification successResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(BODY)
-            .build();
-    public static ResponseSpecification loginSuccessResponseSpec = new ResponseSpecBuilder()
-            .log(STATUS)
-            .expectStatusCode(200)
+            .expectBody("id", notNullValue())
             .build();
 
-    public static ResponseSpecification loginUnSuccessResponseSpec = new ResponseSpecBuilder()
-            .log(ALL)
-            .expectStatusCode(401)
-            .build();
-
-    public static ResponseSpecification createUnSuccessResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification unSuccessResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(400)
