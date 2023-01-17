@@ -1,15 +1,13 @@
 package models.lombok;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize
+
 public class ProjectResponseBody {
 
-    private String id;
+    public Long id;
     private String parent_id;
     private Integer order;
     private String color;
@@ -21,4 +19,5 @@ public class ProjectResponseBody {
     private Boolean is_team_inbox;
     private String url;
     private String view_style;
+
 }

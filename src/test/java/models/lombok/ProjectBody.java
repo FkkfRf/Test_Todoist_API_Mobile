@@ -8,5 +8,5 @@ import lombok.Data;
 public class ProjectBody {
 
     private String name;
-    private String id;
+    private Long id;
 }

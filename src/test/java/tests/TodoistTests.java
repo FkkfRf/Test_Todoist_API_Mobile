@@ -2,16 +2,14 @@ package tests;
 
 import base.BaseTestAPI;
 import models.lombok.ProjectBody;
-import models.lombok.ProjectResponseBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.RequestSpecs.createRequestSpec;
 import static spec.RequestSpecs.getRequestSpec;
@@ -19,14 +17,13 @@ import static spec.ResponseSpecs.*;
 
 public class TodoistTests extends BaseTestAPI {
 
-
     @Test
     @DisplayName("Добавить проект")
     void addNewProjectTest() {
         ProjectBody projectBody = new ProjectBody();
 
         final ProjectBody[] projectData = {new ProjectBody()};
-        projectBody.setName("Проект Ю");
+        projectBody.setName("Проект F");
 
         step("Создать проект", () -> {
             projectData[0] = given()
@@ -44,26 +41,39 @@ public class TodoistTests extends BaseTestAPI {
 
     @Test
     @DisplayName("Изменить имя последнего созданного проекта")
-    public void updateNameOfLastProjectTest() {
+    public void updateNameOfLastCreateProjectTest() {
 
-        step("Получить имена всех проектов", () -> {
-            //ProjectResponseBody response = new ProjectResponseBody();
-            List<ProjectResponseBody> response = new ArrayList<>();
-            ProjectResponseBody responsee = given()
+
+        step("Получить список id созданных проектов", () -> {
+            List<Long> idList = new ArrayList<>();
+            idList = given()
                     .spec(getRequestSpec)
                     .when()
                     .get("/projects")
                     .then()
                     .spec(successResponseSpec)
-                    .extract().as(ProjectResponseBody.class);
+                    .body("id", notNullValue())
+                    .extract().jsonPath().getList("id");
+            System.out.println(idList);
+        });
 
+        step("Получить name последнего созданного проект", () -> {
+            ProjectBody projectBody = new ProjectBody();
+            projectBody.setId(Long.valueOf(Collections.max(idList)));
+            String name;
 
-/* List<StepData> stepList = new ArrayList<>();
-            for (int i = 0; i < stepList.size(); i++) {
-                $$(".TreeElement__node").get(i).shouldHave(text(stepList.get(i).getName()));
-            }
-            List<String> expectedSteps = stepList.stream().map(StepData::getName).toList();
-            */
+            name = given()
+                    .spec(getRequestSpec)
+                    .body(projectBody)
+                    .when()
+                    .get("/projects")
+                    .then()
+                    .spec(successResponseSpec)
+                    .body("id", notNullValue())
+                    .extract().jsonPath().getString("name");
+
+            System.out.println(name);
+
         });
     }
 
