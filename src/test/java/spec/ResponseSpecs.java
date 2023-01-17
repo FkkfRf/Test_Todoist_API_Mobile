@@ -1,6 +1,7 @@
 package spec;
 
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.filter.log.LogDetail.*;

@@ -23,22 +23,23 @@ public class TodoistTests extends BaseTestAPI {
     @Test
     @DisplayName("Добавить проект")
     void addNewProjectTest() {
-
         ProjectBody projectBody = new ProjectBody();
-        projectBody.setName("Проект 2");
+
+        final ProjectBody[] projectData = {new ProjectBody()};
+        projectBody.setName("Проект Ю");
 
         step("Создать проект", () -> {
-            ProjectResponseBody response = given()
+            projectData[0] = given()
                     .spec(createRequestSpec)
                     .body(projectBody)
                     .when()
                     .post("/projects")
                     .then()
                     .spec(successResponseSpec)
-                    .extract().as(ProjectResponseBody.class);
+                    .extract().as(ProjectBody.class);
         });
         step("Проверить наличие созданного проекта в response", () ->
-                assertEquals("Проект Ю", projectBody.getName()));
+                assertEquals("Проект Ю", projectData[0].getName()));
     }
 
     @Test
