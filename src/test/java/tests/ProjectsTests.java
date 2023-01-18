@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.RequestSpecs.createRequestSpec;
 import static spec.RequestSpecs.getRequestSpec;
 import static spec.ResponseSpecs.*;
+import static tests.DataForTests.projectName;
 
 public class ProjectsTests extends BaseTest {
     private List<String> idList = new ArrayList<>();
@@ -29,7 +30,7 @@ public class ProjectsTests extends BaseTest {
         ProjectBody projectBody = new ProjectBody();
 
         final ProjectBody[] projectData = {new ProjectBody()};
-        projectBody.setName("Проект F");
+        projectBody.setName(projectName);
 
         step("Создать проект", () -> {
             projectData[0] = given()
@@ -42,7 +43,7 @@ public class ProjectsTests extends BaseTest {
                     .extract().as(ProjectBody.class);
         });
         step("Проверить наличие созданного проекта в response", () ->
-                assertEquals("Проект F", projectData[0].getName()));
+                assertEquals(projectName, projectData[0].getName()));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class ProjectsTests extends BaseTest {
         switch (idList.size()) {
             case 1:
                 step("Изменить имя последнего созданного проекта (проектов нет) ", () -> {
-                    projectBody.setName("Изменённый проект");
+                    projectBody.setName(projectName + "1");
                     given()
                             .spec(createRequestSpec)
                             .body(projectBody)
@@ -82,7 +83,7 @@ public class ProjectsTests extends BaseTest {
 
             default:
                 step("Изменить имя последнего созданного проекта (проекты созданы)", () -> {
-                    projectBody.setName("Изменённый проект");
+                    projectBody.setName(projectName + " 1");
                     projectData[0] = given()
                             .spec(createRequestSpec)
                             .body(projectBody)
@@ -93,7 +94,7 @@ public class ProjectsTests extends BaseTest {
                             .extract().as(ProjectBody.class);
                 });
                 step("Проверить имя проекта в response", () ->
-                        assertEquals("Изменённый проект", projectData[0].getName()));
+                        assertEquals(projectName + " 1", projectData[0].getName()));
                 break;
         }
     }

@@ -19,6 +19,7 @@ import static spec.RequestSpecs.createRequestSpec;
 import static spec.RequestSpecs.getRequestSpec;
 import static spec.ResponseSpecs.noContentResponseSpec;
 import static spec.ResponseSpecs.successResponseSpec;
+import static tests.DataForTests.*;
 
 public class TasksOfProjectsTests extends BaseTest {
     private String projectId;
@@ -35,7 +36,7 @@ public class TasksOfProjectsTests extends BaseTest {
         final TaskBody[] taskData = {new TaskBody()};
 
         step("Создать проект", () -> {
-            projectBody.setName("Проект K");
+            projectBody.setName(projectName + " 2");
             projectId = String.valueOf(given()
                     .spec(createRequestSpec)
                     .body(projectBody)
@@ -47,8 +48,8 @@ public class TasksOfProjectsTests extends BaseTest {
         });
 
         step("Добавить задачу в созданный проект (REST API)", () -> {
-            taskBody.setContent("Новая задача");
-            taskBody.setDescription("Описание тестовой задачи");
+            taskBody.setContent(taskName);
+            taskBody.setDescription(taskDescription);
             taskBody.setProject_id(projectId);
             taskData[0] = given()
                     .spec(createRequestSpec)
@@ -60,7 +61,7 @@ public class TasksOfProjectsTests extends BaseTest {
                     .extract().as(TaskBody.class);
         });
         step("Проверить имя задачи", () ->
-                assertEquals("Новая задача", taskData[0].getContent()));
+                assertEquals(taskName, taskData[0].getContent()));
         step("Проверить id проекта", () ->
                 assertEquals(projectId, taskData[0].getProject_id()));
     }
@@ -75,7 +76,7 @@ public class TasksOfProjectsTests extends BaseTest {
         final TaskBody[] taskData = {new TaskBody()};
 
         step("Создать проект", () -> {
-            projectBody.setName("Проект T");
+            projectBody.setName(projectName + " 3");
             projectId = String.valueOf(given()
                     .spec(createRequestSpec)
                     .body(projectBody)
@@ -87,7 +88,7 @@ public class TasksOfProjectsTests extends BaseTest {
         });
 
         step("Добавить задачу в созданный проект (REST API)", () -> {
-            taskBody.setContent("Задача T");
+            taskBody.setContent(taskName);
             taskBody.setProject_id(projectId);
             taskData[0] = given()
                     .spec(createRequestSpec)
