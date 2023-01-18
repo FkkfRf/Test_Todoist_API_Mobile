@@ -1,7 +1,6 @@
 package spec;
 
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.filter.log.LogDetail.*;
@@ -16,13 +15,11 @@ public class ResponseSpecs {
 
     public static ResponseSpecification unSuccessResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(400)
+            .expectStatusCode(404)
             .build();
 
-    public static ResponseSpecification deleteResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification noContentResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
-            .log(BODY)
             .expectStatusCode(204)
             .build();
 }

@@ -23,9 +23,7 @@ public class ProjectResponseBodyJsonCreator {
     private String view_style;
     private String type;
     @JsonCreator
-    public ProjectResponseBodyJsonCreator(
-            )
-    {
+    public ProjectResponseBodyJsonCreator(){
         this.id = id;
         this.parent_id = parent_id;
         this.order = order;
