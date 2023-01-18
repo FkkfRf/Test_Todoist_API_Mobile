@@ -19,6 +19,7 @@ import static spec.ResponseSpecs.*;
 
 public class ProjectsTests extends BaseTest {
     private List<String> idList = new ArrayList<>();
+    private String projectId;
 
     @DisplayName("Добавить проект (REST API)")
     @Owner("FkkfRf")
@@ -62,7 +63,9 @@ public class ProjectsTests extends BaseTest {
             System.out.println(idList);
         });
 
-        String max = Collections.max(idList);
+        step("Получить Id последнего проекта", () ->
+                projectId = Collections.max(idList));
+
         switch (idList.size()) {
             case 1:
                 step("Изменить имя последнего созданного проекта (проектов нет) ", () -> {
@@ -71,7 +74,7 @@ public class ProjectsTests extends BaseTest {
                             .spec(createRequestSpec)
                             .body(projectBody)
                             .when()
-                            .post("/projects/" + max)
+                            .post("/projects/" + projectId)
                             .then()
                             .spec(unSuccessResponseSpec);
                 });
@@ -84,7 +87,7 @@ public class ProjectsTests extends BaseTest {
                             .spec(createRequestSpec)
                             .body(projectBody)
                             .when()
-                            .post("/projects/" + max)
+                            .post("/projects/" + projectId)
                             .then()
                             .spec(successResponseSpec)
                             .extract().as(ProjectBody.class);
@@ -110,14 +113,16 @@ public class ProjectsTests extends BaseTest {
             System.out.println(idList);
         });
 
-        String max = Collections.max(idList);
+        step("Получить Id последнего проекта", () ->
+                projectId = Collections.max(idList));
+
         switch (idList.size()) {
             case 1:
                 step("Удалить последний созданный проект (проектов нет) ", () -> {
                     given()
                             .spec(createRequestSpec)
                             .when()
-                            .delete("/projects/" + max)
+                            .delete("/projects/" + projectId)
                             .then()
                             .spec(noContentResponseSpec);
                 });
@@ -127,7 +132,7 @@ public class ProjectsTests extends BaseTest {
                     given()
                             .spec(createRequestSpec)
                             .when()
-                            .delete("/projects/" + max)
+                            .delete("/projects/" + projectId)
                             .then()
                             .spec(noContentResponseSpec);
                 });

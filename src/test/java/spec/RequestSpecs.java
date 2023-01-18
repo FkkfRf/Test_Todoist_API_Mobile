@@ -15,7 +15,6 @@ public class RequestSpecs {
 
 
     public static RequestSpecification createRequestSpec = with()
-            .log().all()
             .header("Authorization", "Bearer "  + token )
             .header("X-Request-Id", "$(uuidgen)")
             .contentType(JSON)

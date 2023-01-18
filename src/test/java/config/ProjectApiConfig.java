@@ -10,9 +10,9 @@ public interface ProjectApiConfig extends Config {
     String token();
 
     @Key("baseUri")
-    @DefaultValue("https://api.todoist.com/rest/v1")
+    @DefaultValue("https://api.todoist.com/rest/v2")
     String baseUri();
 
-    String projectNumber();
+
 }
 
