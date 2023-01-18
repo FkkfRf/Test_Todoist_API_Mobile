@@ -43,7 +43,6 @@ public class TodoistTests extends BaseTestAPI {
     @DisplayName("Изменить имя последнего созданного проекта")
     public void updateNameOfLastCreateProjectTest() {
 
-
         step("Получить список id созданных проектов", () -> {
             List<Long> idList = new ArrayList<>();
             idList = given()
@@ -57,7 +56,7 @@ public class TodoistTests extends BaseTestAPI {
             System.out.println(idList);
         });
 
-        step("Получить name последнего созданного проект", () -> {
+        step("Получить name последнего созданного проектf", () -> {
             ProjectBody projectBody = new ProjectBody();
             projectBody.setId(Long.valueOf(Collections.max(idList)));
             String name;
