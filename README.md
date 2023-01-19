@@ -69,7 +69,7 @@
   <img src="images/screenshots/JenkinsParam.PNG" alt="job">
 </p>
 
-Cкрипт запуска из Jenkins:
+**Cкрипт запуска** из Jenkins:
 
 > clean
 >
@@ -122,10 +122,10 @@ Report*</strong></code>, кликнув по которому, откроетс�
 <img width="4%" title="Allure TestOPS" src="images/logo/AllureTO-logo.svg"> [Allure TestOps](https://allure.autotests.cloud/project/1827/launches) 
 
 #### ✓ Lanches
-Вся информация о результатах тестирования хранится в разделе Launchs.
+Вся информация о результатах запуска тестов хранится в разделе **Launchs**.
 
 <p align="center">
-  <img src="images/screenshots/TestOpsMainDashboard.PNG" alt="dashboards"">
+  <img src="images/screenshots/TestOpsLanches.PNG" alt="dashboards"">
 </p>
 
 #### ✓ Тест-кейсы
