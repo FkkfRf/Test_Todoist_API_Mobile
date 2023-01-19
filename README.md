@@ -121,7 +121,8 @@ Report*</strong></code>, кликнув по которому, откроетс�
 
 <img width="4%" title="Allure TestOPS" src="images/logo/AllureTO-logo.svg"> [Allure TestOps](https://allure.autotests.cloud/project/1827/launches) 
 
-#### ✓ Основной дашборд
+#### ✓ Lanches
+Вся информация о результатах тестирования хранится в разделе Launchs.
 
 <p align="center">
   <img src="images/screenshots/TestOpsMainDashboard.PNG" alt="dashboards"">
