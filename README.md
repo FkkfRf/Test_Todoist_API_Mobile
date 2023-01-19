@@ -10,8 +10,6 @@
 >
 > - [Реализованы проверки](#chart_with_upwards_trend-реализованы-проверки)
 >
-> - [Запуск тестов из терминала](#triangular_flag_on_post-запуск-тестов-из-терминала)
->
 > - [Запуск тестов в Jenkins](#triangular_flag_on_post-запуск-тестов-в-jenkins)
 >
 > - [Отчет о результатах тестирования в Allure Report](#triangular_flag_on_post-отчет-о-результатах-тестирования-в-allure-report)
@@ -20,7 +18,6 @@
 >
 > - [Уведомления в Telegram с использованием бота](#triangular_flag_on_post-уведомления-в-telegram-с-использованием-бота)
 >
-> - [Пример запуска теста в Selenoid](#triangular_flag_on_post-пример-запуска-теста-в-selenoid)
 
 ## :toolbox: Технологии и инструменты
 
@@ -33,7 +30,6 @@
 <code><img width="4%" title="Gradle" src="images/logo/Gradle-logo.svg"></code>
 <code><img width="4%" title="Junit5" src="images/logo/JUnit5-logo.svg"></code>
 <code><img width="4%" title="RestAssured" src="images/logo/RestAssured-logo.svg"></code>
-<code><img width="4%" title="Selenoid" src="images/logo/Selenoid-logo.svg"></code>
 <code><img width="4%" title="Allure Report" src="images/logo/AllureReport-logo.svg"></code>
 <code><img width="4%" title="Allure TestOps" src="images/logo/AllureTO-logo.svg"></code>
 <code><img width="4%" title="Jenkins" src="images/logo/Jenkins-logo.svg"></code>
@@ -46,7 +42,6 @@
 >- *<code><strong>*Gradle*</strong></code> - сборка проекта*
 >- *<code><strong>*JUnit 5*</strong></code> - фреймворк для модульного тестирования*
 >- *<code><strong>*Jenkins*</strong></code> - запуск тестов*
->- *<code><strong>*Selenoid*</strong></code> - запуск браузеров в контейнерах <code><strong>*Docker*</strong></code>.*
 >- *<code><strong>*RestAssured*</strong></code> - Java-библиотека для тестирования REST API.*
 >- *<code><strong>*Allure Report*</strong></code> - визуализации результатов тестирования*
 >- *<code><strong>*Allure TestOps*</strong></code> - управление тестами*
@@ -58,79 +53,27 @@
 
 #### ✓ Тесты
 
-> - [x] *Позитивная проверка логина на сайт __https://todoist.com__*
->- [x] *Негативная проверка логина на сайт __https://todoist.com__*
-
-## :triangular_flag_on_post: Запуск тестов из терминала
-
-Чтобы запуск тестов легче конфигурирровать, без внесения правок в код, использовалась библиотека owner
-
-В этом случае параметры запуска выносятся в файлы *properties*
-
-> **Property**   файл расположен в директории   **src/test/resources/config/**
->
-#### ✓ Локальный запуск тестов
-
-```bash
-gradle test -Denv=local  
-```
-#### ✓ Удаленный запуск тестов
-
-```bash
-gradle test -Denv=remote 
-```
-
-> где **remote**   определяет **property**  файл, в котором указаны параметры для запуска теста:
-
-> **baseUrl** – адрес удаленного сервера, на котором будут запускаться тесты.
->
-> **browser** – браузер, в котором будут выполняться тесты
->
-> **browserVersion** – версия браузера, в которой будут выполняться тесты
->
-> **browserSize** – размер окна браузера, в котором будут выполняться тесты
-
-
+> - [x] *Добавить проект*
+>- [x] *Изменить имя последнего созданного проектат*
+>- [x] *Удалить последний созданный проект*
+>- [x] *Добавить задачу в новый проект*
+>- [x] *Удалить задачу в новомм проекте*
 
 ## :triangular_flag_on_post: Запуск тестов в Jenkins
 
-<img width="4%" title="Jenkins" src="images/logo/Jenkins-logo.svg"> [Сборка в Jenkins](https://jenkins.autotests.cloud/job/C15-FkkfRf-Test-Nexign/)
+<img width="4%" title="Jenkins" src="images/logo/Jenkins-logo.svg"> [Сборка в Jenkins](https://jenkins.autotests.cloud/job/C15-FkkfRf-Test-Todoist/)
 
-Для обеспечения мобильности выбора параметров при запуске теста из Jenkins,
-
-в настройках сборки задаём варианты параметров для запуска:
+При настройке параметров запуска в Jenkins сразу же определяем интеграцию с проектом в TestOps:
 
 <p align="center">
   <img src="images/screenshots/JenkinsParam.PNG" alt="job">
 </p>
 
-В этом лучае скрипт запуска из Jenkins будет следующим:
+Cкрипт запуска из Jenkins:
 
 > clean
 >
 > test
->
-> -D**browse**r=${BROWSER}
->
-> -D**browserVersion**=${BROWSER_VER}
->
-> -D**browserSize**=${BROWSER_SIZE}
->
-> -D**remote**=${REMOTE_URL}
-
-Затем выбираем "Собрать с параметрами" и указываем необходимые
-
-<p align="center">
-  <img src="images/screenshots/JenkinsParam2.PNG" alt="job">
-</p>
-
-
-Затем выбираем "Собрать с параметрами" и указываем необходимые
-
-<p align="center">
-  <img src="images/screenshots/JenkinsParam2.PNG" alt="job">
-</p>
-
 
 ### Основная страница проекта в Jenkins
 
@@ -144,7 +87,7 @@ Report*</strong></code>, кликнув по которому, откроетс�
 
 ## :triangular_flag_on_post: Отчет о результатах тестирования в Allure Report
 
-<img width="4%" title="Allure Report" src="images/logo/AllureReport-logo.svg"> [Allure Report](https://jenkins.autotests.cloud/job/C15-FkkfRf-Test-Nexign/allure/) 
+<img width="4%" title="Allure Report" src="images/logo/AllureReport-logo.svg"> [Allure Report](https://jenkins.autotests.cloud/job/C15-FkkfRf-Test-Todoist/allure/) 
 
 #### ✓ Главная страница Allure-отчета содержит следующие информационные блоки:
 
@@ -176,7 +119,7 @@ Report*</strong></code>, кликнув по которому, откроетс�
 
 ## :triangular_flag_on_post: Интеграция с Allure TestOps
 
-<img width="4%" title="Allure TestOPS" src="images/logo/AllureTO-logo.svg"> [Allure TestOps](https://allure.autotests.cloud/launch/18153) 
+<img width="4%" title="Allure TestOPS" src="images/logo/AllureTO-logo.svg"> [Allure TestOps](https://allure.autotests.cloud/project/1827/launches) 
 
 #### ✓ Основной дашборд
 
@@ -202,13 +145,5 @@ Report*</strong></code>, кликнув по которому, откроетс�
 <img title="Telegram Notifications" src="images/screenshots/Notification.PNG">
 </p>
 
-## :triangular_flag_on_post: Пример запуска теста в Selenoid
 
-К каждому тесту в отчете прилагается видео, cформированное в процессе выполнения тестов на платформе Selenoid.
-> <p align="left">
-<img width="4%" title="Selenoid" src="images/logo/Selenoid-logo.svg">
-  </p>
-<p align="center">
-  <img title="Selenoid Video" src="images/screenshots/Selenoid." width="500">
-</p>
 
