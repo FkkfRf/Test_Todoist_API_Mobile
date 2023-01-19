@@ -4,6 +4,11 @@
 <code><img width="50%" title="GitHub" src="images/icons/Todoist-logo.png"></code>
 #### © Doist Inc.
 
+
+<a target="_blank" href="https://developer.todoist.com/guides/#developing-with-todoist">При разработке тестов использовалась документация</a><img width="15%" title="Developer" src="images/icons/Todoist-developer.png">
+
+
+
 # :closed_book:    Содержание
 
 > - [Технологии и инструменты](#toolbox-технологии-и-инструменты)
