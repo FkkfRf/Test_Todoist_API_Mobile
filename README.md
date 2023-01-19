@@ -117,6 +117,8 @@ Report*</strong></code>, кликнув по которому, откроетс�
   <img src="images/screenshots/Allure2.PNG" alt="Allure Report">
 </p>
 
+Описания тестов и шагов тестов создаётся автоматически, на основе аннотаций и степов, созданных в исходном коде.
+
 ## :triangular_flag_on_post: Интеграция с Allure TestOps
 
 <img width="4%" title="Allure TestOPS" src="images/logo/AllureTO-logo.svg"> [Allure TestOps](https://allure.autotests.cloud/project/1827/launches) 
@@ -130,7 +132,7 @@ Report*</strong></code>, кликнув по которому, откроетс�
 
 #### ✓ Тест-кейсы
 
-Тест-кейсы автоматически создаются на основе списка тестов, в AllureReport
+Тест-кейсы автоматически создаются на основе списка тестов из  AllureReport
 <p align="center">
   <img src="images/screenshots/TestOpsTestCases.PNG" alt="test cases">
 </p>
