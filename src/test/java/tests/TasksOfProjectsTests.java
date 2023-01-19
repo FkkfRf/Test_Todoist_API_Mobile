@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -24,7 +25,6 @@ import static tests.DataForTests.*;
 public class TasksOfProjectsTests extends BaseTest {
     private String projectId;
     private String taskId;
-    private List<String> idList = new ArrayList<>();
 
     @DisplayName("Добавить задачу в новый проект (REST API)")
     @Owner("FkkfRf")
@@ -33,7 +33,7 @@ public class TasksOfProjectsTests extends BaseTest {
     void addNewTaskForLastCreateProjectTest() {
         ProjectBody projectBody = new ProjectBody();
         TaskBody taskBody = new TaskBody();
-        final TaskBody[] taskData = {new TaskBody()};
+        AtomicReference<TaskBody> taskData = new AtomicReference<TaskBody>();
 
         step("Создать проект", () -> {
             projectBody.setName(projectName + " 2");
@@ -51,7 +51,7 @@ public class TasksOfProjectsTests extends BaseTest {
             taskBody.setContent(taskName);
             taskBody.setDescription(taskDescription);
             taskBody.setProject_id(projectId);
-            taskData[0] = given()
+            TaskBody taskDataValue = given()
                     .spec(createRequestSpec)
                     .body(taskBody)
                     .when()
@@ -59,11 +59,13 @@ public class TasksOfProjectsTests extends BaseTest {
                     .then()
                     .spec(successResponseSpec)
                     .extract().as(TaskBody.class);
+
+            taskData.set(taskDataValue);
         });
         step("Проверить имя задачи", () ->
-                assertEquals(taskName, taskData[0].getContent()));
+                assertEquals(taskName, taskData.get().getContent()));
         step("Проверить id проекта", () ->
-                assertEquals(projectId, taskData[0].getProject_id()));
+                assertEquals(projectId, taskData.get().getProject_id()));
     }
 
     @DisplayName("Удалить задачу в новомм проекте (REST API)")
@@ -73,7 +75,7 @@ public class TasksOfProjectsTests extends BaseTest {
     void deleteFromNewProjectTest() {
         ProjectBody projectBody = new ProjectBody();
         TaskBody taskBody = new TaskBody();
-        final TaskBody[] taskData = {new TaskBody()};
+        AtomicReference<TaskBody> taskData = new AtomicReference<TaskBody>();
 
         step("Создать проект", () -> {
             projectBody.setName(projectName + " 3");
@@ -90,7 +92,7 @@ public class TasksOfProjectsTests extends BaseTest {
         step("Добавить задачу в созданный проект (REST API)", () -> {
             taskBody.setContent(taskName);
             taskBody.setProject_id(projectId);
-            taskData[0] = given()
+            TaskBody taskDataValue = given()
                     .spec(createRequestSpec)
                     .body(taskBody)
                     .when()
@@ -98,7 +100,9 @@ public class TasksOfProjectsTests extends BaseTest {
                     .then()
                     .spec(successResponseSpec)
                     .extract().as(TaskBody.class);
-            taskId = taskData[0].getId();
+
+            taskData.set(taskDataValue);
+            taskId = taskData.get().getId();
         });
 
 
