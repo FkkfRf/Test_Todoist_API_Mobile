@@ -8,8 +8,6 @@ import models.lombok.TaskBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static io.qameta.allure.Allure.step;

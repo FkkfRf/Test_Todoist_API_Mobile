@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -28,12 +29,11 @@ public class ProjectsTests extends BaseTest {
     @Test
     void addNewProjectTest() {
         ProjectBody projectBody = new ProjectBody();
-
-        final ProjectBody[] projectData = {new ProjectBody()};
-        projectBody.setName(projectName);
+        AtomicReference<ProjectBody> projectData = new AtomicReference<ProjectBody>();
 
         step("Создать проект", () -> {
-            projectData[0] = given()
+            projectBody.setName(projectName);
+            ProjectBody projectDataValue = given()
                     .spec(createRequestSpec)
                     .body(projectBody)
                     .when()
@@ -41,16 +41,20 @@ public class ProjectsTests extends BaseTest {
                     .then()
                     .spec(successResponseSpec)
                     .extract().as(ProjectBody.class);
+
+            projectData.set(projectDataValue);
         });
         step("Проверить наличие созданного проекта в response", () ->
-                assertEquals(projectName, projectData[0].getName()));
+                assertEquals(projectName, projectData.get().getName()));
     }
 
-    @Test
     @DisplayName("Изменить имя последнего созданного проекта (REST API)")
+    @Owner("FkkfRf")
+    @Link(url = "https://todoist.com/")
+    @Test
     public void updateNameOfLastCreateProjectTest() {
         ProjectBody projectBody = new ProjectBody();
-        final ProjectBody[] projectData = {new ProjectBody()};
+        AtomicReference<ProjectBody> projectData = new AtomicReference<ProjectBody>();
 
         step("Получить список id созданных проектов", () -> {
             idList = given()
@@ -84,7 +88,7 @@ public class ProjectsTests extends BaseTest {
             default:
                 step("Изменить имя последнего созданного проекта (проекты созданы)", () -> {
                     projectBody.setName(projectName + " 1");
-                    projectData[0] = given()
+                    ProjectBody projectDataValue = given()
                             .spec(createRequestSpec)
                             .body(projectBody)
                             .when()
@@ -92,15 +96,19 @@ public class ProjectsTests extends BaseTest {
                             .then()
                             .spec(successResponseSpec)
                             .extract().as(ProjectBody.class);
+
+                    projectData.set(projectDataValue);
                 });
                 step("Проверить имя проекта в response", () ->
-                        assertEquals(projectName + " 1", projectData[0].getName()));
+                        assertEquals(projectName + " 1", projectData.get().getName()));
                 break;
         }
     }
 
-    @Test
     @DisplayName("Удалить последний созданный проект (REST API)")
+    @Owner("FkkfRf")
+    @Link(url = "https://todoist.com/")
+    @Test
     public void deleteLastCreateProjectTest() {
         step("Получить список id созданных проектов", () -> {
             idList = given()
