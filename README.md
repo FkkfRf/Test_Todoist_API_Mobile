@@ -82,9 +82,7 @@ gradle test apiTests
 
 **Cкрипт запуска** из Jenkins:
 
-> clean
->
-> test
+> clean test
 
 ### Основная страница проекта в Jenkins
 
