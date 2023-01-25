@@ -233,13 +233,13 @@ gradle test mobileTests
 > <code>*EXECUTORS*</code> - отображает исполнителя текущей сборки (ссылка на сборку в Jenkins)
 
 <p align="center">
-  <img src="images/screenshots/Allure1.PNG" alt="Allure  Report" >
+  <img src="images/screenshots/mobile/Allure1.PNG" alt="Allure  Report" >
 </p>
 
 #### ✓ В разделе Behaviors тесты отображаются  сгруппироваными в многоуровневый список:
 
 <p align="center">
-  <img src="images/screenshots/Allure2.PNG" alt="Allure Report">
+  <img src="images/screenshots/mobile/Allure2.PNG" alt="Allure Report">
 </p>
 
 Описания тестов и шагов тестов создаётся автоматически, на основе аннотаций и степов, созданных в исходном коде.
