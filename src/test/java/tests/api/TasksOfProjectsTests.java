@@ -20,11 +20,11 @@ import static models.spec.ResponseSpecs.noContentResponseSpec;
 import static models.spec.ResponseSpecs.successResponseSpec;
 import static helpers.DataForTests.*;
 
+@Tag("API")
 public class TasksOfProjectsTests extends BaseTest {
     private String projectId;
     private String taskId;
 
-    @Tag("API")
     @DisplayName("Добавить задачу в новый проект (REST API)")
     @Owner("FkkfRf")
     @Link(url = "https://todoist.com/")
@@ -67,7 +67,6 @@ public class TasksOfProjectsTests extends BaseTest {
                 assertEquals(projectId, taskData.get().getProject_id()));
     }
 
-    @Tag("API")
     @DisplayName("Удалить задачу в новомм проекте (REST API)")
     @Owner("FkkfRf")
     @Link(url = "https://todoist.com/")

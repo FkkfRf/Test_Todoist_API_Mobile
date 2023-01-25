@@ -8,8 +8,9 @@ import static com.codeborne.selenide.Selenide.back;
 import static io.qameta.allure.Allure.step;
 import static helpers.DataForTests.*;
 
+@Tag("MOBILE")
 public class MainPageTests extends BaseTest {
-    @Tag("MOBILE")
+
     @DisplayName("Добавить задачу")
     @Test
     void addTaskTest() {
@@ -24,7 +25,6 @@ public class MainPageTests extends BaseTest {
         });
     }
 
-    @Tag("MOBILE")
     @DisplayName("Добавить проект")
     @Test
     void addProjectTest() {

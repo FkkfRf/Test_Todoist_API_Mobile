@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static models.spec.ResponseSpecs.*;
 import static helpers.DataForTests.projectName;
 
+@Tag("API")
 public class ProjectsTests extends BaseTest {
     private List<String> idList = new ArrayList<>();
     private String projectId;
 
-    @Tag("API")
     @DisplayName("Добавить проект (REST API)")
     @Owner("FkkfRf")
     @Link(url = "https://todoist.com/")
@@ -48,7 +48,6 @@ public class ProjectsTests extends BaseTest {
                 assertEquals(projectName, projectData.get().getName()));
     }
 
-    @Tag("API")
     @DisplayName("Изменить имя последнего созданного проекта (REST API)")
     @Owner("FkkfRf")
     @Link(url = "https://todoist.com/")
@@ -106,7 +105,6 @@ public class ProjectsTests extends BaseTest {
         }
     }
 
-    @Tag("API")
     @DisplayName("Удалить последний созданный проект (REST API)")
     @Owner("FkkfRf")
     @Link(url = "https://todoist.com/")

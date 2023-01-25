@@ -10,17 +10,17 @@ import java.util.TimeZone;
 
 import static io.qameta.allure.Allure.step;
 
+@Tag("MOBILE")
 public class RescheduleTests extends BaseTest {
 
-    @Tag("MOBILE")
     @DisplayName("Добавить текущее время в планировщике")
     @Test
-    public void addTimeInScheduler(){
+    public void addTimeInScheduler() {
 
         Date dateNow = new Date();
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+00"));
-        String timeNow = timeFormat.format(dateNow).replace(" ","");
+        String timeNow = timeFormat.format(dateNow).replace(" ", "");
 
         System.out.println("Текущее время " + timeNow);
 
