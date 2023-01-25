@@ -4,11 +4,14 @@
 <code><img width="50%" title="GitHub" src="images/icons/Todoist-logo.png"></code>
 #### © Doist Inc.
 
+> - [API](#API)
+>
+> - [MOBILE](#MOBILE)
 
-<a target="_blank" href="https://developer.todoist.com/guides/#developing-with-todoist">При разработке тестов использовалась документация</a><img width="15%" title="Developer" src="images/icons/Todoist-developer.png">
+
 # API
-
-# :closed_book:    Содержание
+<a target="_blank" href="https://developer.todoist.com/guides/#developing-with-todoist">При разработке API тестов использовалась документация</a><img width="15%" title="Developer" src="images/icons/Todoist-developer.png">
+## :closed_book:    Содержание
 
 > - [Технологии и инструменты](#toolbox-технологии-и-инструменты)
 >
@@ -52,8 +55,6 @@
 >- *<code><strong>*Telegram Bot*</strong></code> - уведомление о результатах тестирования*
 
 ## :chart_with_upwards_trend: Реализованы проверки
-
-### API
 
 #### ✓ Тесты
 
@@ -162,7 +163,7 @@ Report*</strong></code>, кликнув по которому, откроетс�
 # MOBILE
 #### Тестирование проводилось c использованием Android Studio + Appium Server GUI на локальном эмуляторе
 
-# :closed_book:    Содержание
+## :closed_book:    Содержание
 
 > - [Технологии и инструменты](#toolbox-технологии-и-инструменты)
 >
@@ -196,8 +197,6 @@ Report*</strong></code>, кликнув по которому, откроетс�
 >- *<code><strong>*Android Studio*</strong></code> - интегрированная среда разработки (IDE) для работы с платформой Android*
 
 ## :chart_with_upwards_trend: Реализованы проверки
-
-### Mobile
 
 #### ✓ Тесты
 
