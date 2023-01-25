@@ -1,4 +1,4 @@
-package models.spec;
+package spec;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;

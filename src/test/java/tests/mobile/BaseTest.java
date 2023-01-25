@@ -2,14 +2,14 @@ package tests.mobile;
 
 import com.codeborne.selenide.Configuration;
 import config.mobile.MobileConfig;
-import drivers.LocalMobileDriver;
+import drivers.mobile.LocalMobileDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import tests.mobile.page.*;
+import page.mobile.*;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;

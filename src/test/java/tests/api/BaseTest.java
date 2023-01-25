@@ -9,8 +9,8 @@ import static io.qameta.allure.Allure.step;
 public class BaseTest {
     @BeforeAll
     static void setUp() {
-        step("Устанавливаем базовый URI для REST API", () -> {
-            RestAssured.filters(withCustomTemplates());
+        Allure.step("Устанавливаем базовый URI для REST API", () -> {
+            RestAssured.filters(CustomApiListener.withCustomTemplates());
         });
     }
 }

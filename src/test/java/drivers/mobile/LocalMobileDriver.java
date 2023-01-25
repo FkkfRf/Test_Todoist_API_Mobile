@@ -1,4 +1,4 @@
-package drivers;
+package drivers.mobile;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.mobile.MobileConfig;
@@ -26,7 +26,6 @@ public class LocalMobileDriver implements WebDriverProvider {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
 

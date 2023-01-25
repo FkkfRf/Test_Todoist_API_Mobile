@@ -1,5 +1,6 @@
 package tests.mobile;
 
+import helpers.DataForTests;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -36,13 +37,13 @@ public class MainPageTests extends BaseTest {
             mainPage.clickMenuButton();
             projectPage.checkProjectPage("Projects");
             projectPage.clickAddProjectButon();
-            projectPage.createProject(projectName);
-            projectPage.checkNewProjectName(projectName);
+            projectPage.createProject(DataForTests.projectName);
+            projectPage.checkNewProjectName(DataForTests.projectName);
             back();
         });
         step("Найти созданный проект в общем списке проектов", () -> {
             mainPage.clickMenuButton();
-            projectPage.checkProjectPage("Проект 1");
+            projectPage.checkProjectPage(projectName);
         });
     }
 }

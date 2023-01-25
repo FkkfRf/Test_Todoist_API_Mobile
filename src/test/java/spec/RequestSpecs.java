@@ -1,4 +1,4 @@
-package models.spec;
+package spec;
 
 import config.api.ApiConfig;
 import io.restassured.specification.RequestSpecification;
