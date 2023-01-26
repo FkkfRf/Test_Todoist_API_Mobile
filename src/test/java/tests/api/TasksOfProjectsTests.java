@@ -27,6 +27,7 @@ public class TasksOfProjectsTests extends BaseTest {
         TaskBody taskBody = new TaskBody();
 
         projectBody.setName(DataForTests.projectName + " 2");
+
         String projectId = step("Создать проект", () ->
                 String.valueOf(given()
                         .spec(RequestSpecs.createRequestSpec)

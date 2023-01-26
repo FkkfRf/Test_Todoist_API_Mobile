@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class ResponseSpecs {
     public static ResponseSpecification successResponseSpec = new ResponseSpecBuilder()
+            .log(STATUS)
             .expectStatusCode(200)
             .expectBody("id", notNullValue())
             .build();

@@ -21,32 +21,21 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("API")
+@Owner("FkkfRf")
+@Link(url = "https://todoist.com/")
 public class ProjectsTests extends BaseTest {
+    ApiMetods apiMetods = new ApiMetods();
+
     @DisplayName("Добавить проект (REST API)")
-    @Owner("FkkfRf")
-    @Link(url = "https://todoist.com/")
     @Test
     void addNewProjectTest() {
-        ProjectBody projectBody = new ProjectBody();
-        projectBody.setName(DataForTests.projectName);
-
-        ProjectBody projectData = step("Создать проект", () ->
-                given()
-                        .spec(RequestSpecs.createRequestSpec)
-                        .body(projectBody)
-                        .when()
-                        .post("/projects")
-                        .then()
-                        .spec(ResponseSpecs.successResponseSpec)
-                        .extract().as(ProjectBody.class));
-
+        ApiMetods projectData = apiMetods
+                .successPostObject("/projects", DataForTests.projectName);
         step("Проверить наличие созданного проекта в response", () ->
-                assertEquals(DataForTests.projectName, projectData.getName()));
+                assertEquals(DataForTests.projectName, projectData.projectBody.getName()));
     }
 
     @DisplayName("Изменить имя последнего созданного проекта (REST API)")
-    @Owner("FkkfRf")
-    @Link(url = "https://todoist.com/")
     @Test
     public void updateNameOfLastCreateProjectTest() {
 
@@ -78,27 +67,16 @@ public class ProjectsTests extends BaseTest {
                 break;
             }
             default: {
-                projectBody.setName(DataForTests.projectName + " 1");
-                ProjectBody projectData = step("Изменить имя последнего созданного проекта (проекты созданы)", () ->
-                        given()
-                                .spec(RequestSpecs.createRequestSpec)
-                                .body(projectBody)
-                                .when()
-                                .post("/projects/" + projectId)
-                                .then()
-                                .spec(ResponseSpecs.successResponseSpec)
-                                .extract().as(ProjectBody.class));
-
-                step("Проверить имя проекта в response", () ->
-                        Assertions.assertEquals(DataForTests.projectName + " 1", projectData.getName()));
+                ApiMetods projectData = apiMetods
+                        .successPostObject("/projects/" + projectId, DataForTests.projectName + " 1");
+                step("Проверить имя проекта ", () ->
+                        Assertions.assertEquals(DataForTests.projectName + " 1", projectData.projectBody.getName()));
                 break;
             }
         }
     }
 
     @DisplayName("Удалить последний созданный проект (REST API)")
-    @Owner("FkkfRf")
-    @Link(url = "https://todoist.com/")
     @Test
     public void deleteLastCreateProjectTest() {
         List<String> idList = step("Получить список id созданных проектов", () ->
