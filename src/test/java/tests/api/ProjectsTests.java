@@ -35,9 +35,9 @@ public class ProjectsTests extends BaseTest {
                 assertEquals(DataForTests.projectName, projectData.projectBody.getName()));
     }
 
-    @DisplayName("Изменить имя последнего созданного проекта (REST API)")
+    @DisplayName("Изменить имя последнего созданного проекта. Позитивный. (REST API)")
     @Test
-    public void updateNameOfLastCreateProjectTest() {
+    public void sucessUpdateNameOfLastCreateProjectTest() {
 
         ProjectBody projectBody = new ProjectBody();
         projectBody.setName(DataForTests.projectName + "1");
@@ -54,8 +54,32 @@ public class ProjectsTests extends BaseTest {
 
         String projectId = step("Получить Id последнего проекта", () -> Collections.max(idList));
 
-        switch (idList.size()) {
-            case 1: {
+                ApiMetods projectData = apiMetods
+                        .successPostObject("/projects/" + projectId, DataForTests.projectName + " 1");
+                step("Проверить имя проекта ", () ->
+                        Assertions.assertEquals(DataForTests.projectName + " 1", projectData.projectBody.getName()));
+
+        }
+
+    @DisplayName("Изменить имя последнего созданного проекта. Негативный (REST API)")
+    @Test
+    public void unSucessUpdateNameOfLastCreateProjectTest() {
+
+        ProjectBody projectBody = new ProjectBody();
+        projectBody.setName(DataForTests.projectName + "1");
+
+        List<String> idList = step("Получить список id созданных проектов", () -> RestAssured.given()
+                .spec(RequestSpecs.getRequestSpec)
+                .when()
+                .get("/projects")
+                .then()
+                .spec(ResponseSpecs.successResponseSpec)
+                .body("id", notNullValue())
+                .extract().jsonPath().getList("id"));
+        System.out.println(idList);
+
+        String projectId = step("Получить Id последнего проекта", () -> Collections.max(idList));
+
                 step("Изменить имя последнего созданного проекта (проектов нет) ", () ->
                         given()
                                 .spec(RequestSpecs.createRequestSpec)
@@ -64,21 +88,12 @@ public class ProjectsTests extends BaseTest {
                                 .post("/projects/" + projectId)
                                 .then()
                                 .spec(ResponseSpecs.unSuccessResponseSpec));
-                break;
-            }
-            default: {
-                ApiMetods projectData = apiMetods
-                        .successPostObject("/projects/" + projectId, DataForTests.projectName + " 1");
-                step("Проверить имя проекта ", () ->
-                        Assertions.assertEquals(DataForTests.projectName + " 1", projectData.projectBody.getName()));
-                break;
-            }
-        }
+
     }
 
     @DisplayName("Удалить последний созданный проект (REST API)")
     @Test
-    public void deleteLastCreateProjectTest() {
+    public void successDeleteLastCreateProjectTest() {
         List<String> idList = step("Получить список id созданных проектов", () ->
                 given()
                         .spec(RequestSpecs.getRequestSpec)
@@ -92,9 +107,7 @@ public class ProjectsTests extends BaseTest {
 
         String projectId = step("Получить Id последнего проекта", () -> Collections.max(idList));
 
-        switch (idList.size()) {
-            case 1:
-                step("Удалить последний созданный проект (проектов нет) ", () -> {
+                step("Удалить последний созданный проект", () -> {
                     given()
                             .spec(RequestSpecs.createRequestSpec)
                             .when()
@@ -102,19 +115,8 @@ public class ProjectsTests extends BaseTest {
                             .then()
                             .spec(ResponseSpecs.noContentResponseSpec);
                 });
-                break;
-            default:
-                step("Удалить последний созданный проект (проекты созданы)", () -> {
-                    given()
-                            .spec(RequestSpecs.createRequestSpec)
-                            .when()
-                            .delete("/projects/" + projectId)
-                            .then()
-                            .spec(ResponseSpecs.noContentResponseSpec);
-                });
-                break;
-        }
     }
+
 }
 
 

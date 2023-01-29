@@ -17,10 +17,11 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("API")
+@Owner("FkkfRf")
+@Link(url = "https://todoist.com/")
 public class TasksOfProjectsTests extends BaseTest {
     @DisplayName("Добавить задачу в новый проект (REST API)")
-    @Owner("FkkfRf")
-    @Link(url = "https://todoist.com/")
+
     @Test
     void addNewTaskForLastCreateProjectTest() {
         ProjectBody projectBody = new ProjectBody();
@@ -57,8 +58,6 @@ public class TasksOfProjectsTests extends BaseTest {
     }
 
     @DisplayName("Удалить задачу в новомм проекте (REST API)")
-    @Owner("FkkfRf")
-    @Link(url = "https://todoist.com/")
     @Test
     void deleteFromNewProjectTest() {
         ProjectBody projectBody = new ProjectBody();
