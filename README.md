@@ -241,8 +241,8 @@ gradle test mobileTests
 
 Описания тестов и шагов тестов создаётся автоматически, на основе аннотаций и степов, созданных в исходном коде.
 
-#### ✓ Видео выполнения мобильного теста 
+#### ✓ Видео выполнения мобильного теста :
 
 <p align="center">
-  <img src="images/screenshots/mobile/mobile.gif">
+  <img title="mobile Video" src="images/screenshots/mobile/mobile.gif" width="500">
 </p>
