@@ -8,6 +8,9 @@
 >>
 >> - [MOBILE](#MOBILE)
 
+<p align="center">
+  <img src="images/screenshots/mobile/mobile.gif">
+</p>
 
 # API
 <a target="_blank" href="https://developer.todoist.com/guides/#developing-with-todoist">При разработке API тестов использовалась документация</a><img width="15%" title="Developer" src="images/icons/Todoist-developer.png">
