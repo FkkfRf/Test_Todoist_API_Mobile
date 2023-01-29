@@ -8,7 +8,6 @@
 >>
 >> - [MOBILE](#MOBILE)
 
-
 # API
 <a target="_blank" href="https://developer.todoist.com/guides/#developing-with-todoist">При разработке API тестов использовалась документация</a><img width="15%" title="Developer" src="images/icons/Todoist-developer.png">
 
@@ -242,7 +241,7 @@ gradle test mobileTests
 
 Описания тестов и шагов тестов создаётся автоматически, на основе аннотаций и степов, созданных в исходном коде.
 
-#### ✓ Видео выполнения мобильного теста  теста
+#### ✓ Видео выполнения мобильного теста 
 
 <p align="center">
   <img src="images/screenshots/mobile/mobile.gif">
