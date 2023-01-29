@@ -3,7 +3,7 @@ package config.mobile;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-         "classpath:config/mobile/mution.properties"
+        "classpath:config/mobile/emulate.properties"
 })
 
 public interface MobileConfig extends Config {
