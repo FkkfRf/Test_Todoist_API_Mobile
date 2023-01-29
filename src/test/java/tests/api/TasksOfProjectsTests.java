@@ -1,7 +1,5 @@
 package tests.api;
 
-import spec.RequestSpecs;
-import spec.ResponseSpecs;
 import helpers.DataForTests;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
@@ -15,13 +13,17 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static spec.RequestSpecs.createRequestSpec;
+import static spec.ResponseSpecs.noContentResponseSpec;
+import static spec.ResponseSpecs.successResponseSpec;
 
 @Tag("API")
 @Owner("FkkfRf")
 @Link(url = "https://todoist.com/")
 public class TasksOfProjectsTests extends BaseTest {
-    @DisplayName("Добавить задачу в новый проект (REST API)")
+    ApiMetods apiMetods = new ApiMetods();
 
+    @DisplayName("Добавить задачу в новый проект (REST API)")
     @Test
     void addNewTaskForLastCreateProjectTest() {
         ProjectBody projectBody = new ProjectBody();
@@ -31,12 +33,12 @@ public class TasksOfProjectsTests extends BaseTest {
 
         String projectId = step("Создать проект", () ->
                 String.valueOf(given()
-                        .spec(RequestSpecs.createRequestSpec)
+                        .spec(createRequestSpec)
                         .body(projectBody)
                         .when()
                         .post("/projects")
                         .then()
-                        .spec(ResponseSpecs.successResponseSpec)
+                        .spec(successResponseSpec)
                         .extract().jsonPath().getLong("id")));
 
         taskBody.setContent(DataForTests.taskName);
@@ -44,12 +46,12 @@ public class TasksOfProjectsTests extends BaseTest {
         taskBody.setProject_id(projectId);
         TaskBody taskData = step("Добавить задачу в созданный проект (REST API)", () ->
                 given()
-                        .spec(RequestSpecs.createRequestSpec)
+                        .spec(createRequestSpec)
                         .body(taskBody)
                         .when()
                         .post("/tasks")
                         .then()
-                        .spec(ResponseSpecs.successResponseSpec)
+                        .spec(successResponseSpec)
                         .extract().as(TaskBody.class));
         step("Проверить имя задачи", () ->
                 assertEquals(DataForTests.taskName, taskData.getContent()));
@@ -57,7 +59,7 @@ public class TasksOfProjectsTests extends BaseTest {
                 assertEquals(projectId, taskData.getProject_id()));
     }
 
-    @DisplayName("Удалить задачу в новомм проекте (REST API)")
+    @DisplayName("Удалить задачу в новом проекте (REST API)")
     @Test
     void deleteFromNewProjectTest() {
         ProjectBody projectBody = new ProjectBody();
@@ -66,35 +68,31 @@ public class TasksOfProjectsTests extends BaseTest {
         projectBody.setName(DataForTests.projectName + " 3");
         String projectId = step("Создать проект", () ->
                 String.valueOf(given()
-                        .spec(RequestSpecs.createRequestSpec)
+                        .spec(createRequestSpec)
                         .body(projectBody)
                         .when()
                         .post("/projects")
                         .then()
-                        .spec(ResponseSpecs.successResponseSpec)
+                        .spec(successResponseSpec)
                         .extract().jsonPath().getLong("id")));
 
         taskBody.setContent(DataForTests.taskName);
         taskBody.setProject_id(projectId);
         TaskBody taskData = step("Добавить задачу в созданный проект (REST API)", () ->
                 given()
-                        .spec(RequestSpecs.createRequestSpec)
+                        .spec(createRequestSpec)
                         .body(taskBody)
                         .when()
                         .post("/tasks")
                         .then()
-                        .spec(ResponseSpecs.successResponseSpec)
+                        .spec(successResponseSpec)
                         .extract().as(TaskBody.class));
 
         String taskId = taskData.getId();
 
-        step("Удалить задачу в последнем созданном проект (REST API)", () ->
-                given()
-                        .spec(RequestSpecs.getRequestSpec)
-                        .when()
-                        .delete("/tasks/" + taskId)
-                        .then()
-                        .spec(ResponseSpecs.noContentResponseSpec));
+        step("Удалить задачу в последнем созданном проекте ", () ->
+                apiMetods.
+                        deleteObject(createRequestSpec, noContentResponseSpec, "/tasks/" + taskId));
     }
 }
 

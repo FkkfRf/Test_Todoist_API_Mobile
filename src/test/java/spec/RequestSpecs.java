@@ -15,13 +15,13 @@ public class RequestSpecs {
 
 
     public static RequestSpecification createRequestSpec = with()
-            .header("Authorization", "Bearer "  + token )
+            .header("Authorization", "Bearer " + token)
             .header("X-Request-Id", "$(uuidgen)")
             .contentType(JSON)
             .baseUri(baseUri);
 
     public static RequestSpecification getRequestSpec = with()
-    .header("Authorization", "Bearer " + token)
+            .header("Authorization", "Bearer " + token)
             .baseUri(baseUri)
             .contentType(JSON);
 
