@@ -245,5 +245,5 @@ gradle test mobileTests
 #### ✓ Видео выполнения мобильного теста  теста
 
 <p align="center">
-  <img src="images/screenshots/mobile/mobile.gif" width="500">
+  <img src="images/screenshots/mobile/mobile.gif">
 </p>
