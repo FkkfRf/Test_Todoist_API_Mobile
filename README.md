@@ -2,6 +2,7 @@
 
 
 <code><img width="50%" title="GitHub" src="images/icons/Todoist-logo.png"></code>
+#### <a target="_blank" href="https://todoist.com/">todoist</a>
 #### © Doist Inc.
 
 >> - [API](#API)
